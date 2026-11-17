@@ -1,0 +1,2778 @@
+/* ==========================================================================
+   VENKATESHWARA REFRIGERATIONS AND AIR CONDITIONER SERVICE CENTER
+   Master Stylesheet: style.css — Updated Visual Style
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. RESET & COLOR PALETTE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Warm Soft Ivory / Cream Radial Gradient */
+  --bg-cream-radial: radial-gradient(ellipse at 50% 36%, #FAF7F0 0%, #F5EFE4 45%, #EBE1D0 82%, #E2D6C2 100%);
+
+  /* Rich Temple Gold & Bronze Accents */
+  --gold-primary: #C59A45;
+  --gold-bright: #F5C953;
+  --gold-deep: #A07828;
+  --gold-border: rgba(184, 134, 11, 0.48);
+
+  /* Deep Typography Colors */
+  --title-forest: #15301B;     /* Thicker expressive forest green */
+  --title-charcoal: #222528;   /* Wide bold dark-charcoal sans-serif */
+  --text-tagline: #564B3B;     /* Muted sepia brown */
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #F5EFE4;
+  color: var(--title-charcoal);
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   2. FULL-SCREEN PRELOADER CONTAINER
+   -------------------------------------------------------------------------- */
+#preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-cream-radial);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  overflow: hidden;
+  transition: opacity 0.85s cubic-bezier(0.7, 0, 0.3, 1),
+              visibility 0.85s cubic-bezier(0.7, 0, 0.3, 1),
+              transform 0.85s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+#preloader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(1.02);
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. VINTAGE FRAME & ENLARGED PROMINENT CORNER FLOURISHES
+   -------------------------------------------------------------------------- */
+.vintage-border-frame {
+  position: absolute;
+  inset: clamp(12px, 2.4vw, 26px);
+  border: 1.6px solid var(--gold-border);
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 6;
+}
+
+/* Enlarged Corner Filigree Flourishes */
+.corner-filigree {
+  position: absolute;
+  width: clamp(70px, 9.5vw, 105px);
+  height: clamp(70px, 9.5vw, 105px);
+  filter: drop-shadow(0 2px 4px rgba(184, 134, 11, 0.25));
+}
+
+.corner-filigree.top-left { top: -4px; left: -4px; }
+.corner-filigree.top-right { top: -4px; right: -4px; }
+.corner-filigree.bottom-left { bottom: -4px; left: -4px; }
+.corner-filigree.bottom-right { bottom: -4px; right: -4px; }
+
+.corner-filigree svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Glowing 4-Point Diamond Star at Bottom Right */
+.diamond-star-bottom-right {
+  position: absolute;
+  right: clamp(25px, 4.5vw, 65px);
+  bottom: clamp(65px, 12vh, 115px);
+  width: clamp(26px, 3.6vw, 44px);
+  height: clamp(26px, 3.6vw, 44px);
+  opacity: 0.9;
+  filter: drop-shadow(0 0 12px rgba(245, 201, 83, 0.65));
+  animation: starPulse 3.5s ease-in-out infinite alternate;
+}
+
+.diamond-star-bottom-right svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes starPulse {
+  0% { transform: scale(0.92); opacity: 0.7; }
+  100% { transform: scale(1.14); opacity: 1; }
+}
+
+/* Skip to website button on preloader */
+.btn-skip-preloader {
+  position: absolute;
+  bottom: clamp(16px, 3vh, 28px);
+  right: clamp(16px, 3vw, 32px);
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 1.05rem;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid #E8BC48;
+  border-radius: 50px;
+  color: #15301B;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(21, 48, 27, 0.12);
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.btn-skip-preloader:hover {
+  background: #15301B;
+  color: #FFFFFF;
+  border-color: #FFD700;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   4. NEW TOP-RIGHT PLANT BRANCH ASSET (Scaled with Soft Depth Blur)
+   -------------------------------------------------------------------------- */
+.right-side-branch {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  width: clamp(280px, 35vw, 490px);
+  max-width: 520px;
+  height: auto;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.branch-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* Soft depth-of-field blur to blend naturally into the background */
+  filter: blur(1.5px) contrast(1.04) brightness(0.98);
+  opacity: 0.92;
+  transform-origin: top right;
+  animation: branchGentleSway 10s ease-in-out infinite alternate;
+}
+
+@keyframes branchGentleSway {
+  0% { transform: rotate(0deg) scale(1); }
+  100% { transform: rotate(1.2deg) scale(1.015); }
+}
+
+/* --------------------------------------------------------------------------
+   5. TEMPLE BACKDROP (Enlarged across Upper Section till Branch on Right)
+   -------------------------------------------------------------------------- */
+.temple-backdrop {
+  position: absolute;
+  top: clamp(10px, 2vh, 35px);
+  left: clamp(14px, 2.5vw, 30px);
+  width: calc(100% - clamp(200px, 26vw, 360px));
+  max-width: 1100px;
+  height: clamp(270px, 44vh, 480px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.42; /* Clearly visible, rich temple scenery stretching till branch */
+  mix-blend-mode: multiply;
+  /* Soft feathered edges on all 4 sides, fading seamlessly right before the branch */
+  -webkit-mask-image: -webkit-linear-gradient(left, transparent 0%, black 5%, black 82%, transparent 100%),
+                      -webkit-linear-gradient(top, transparent 0%, black 6%, black 78%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 82%, transparent 100%),
+              linear-gradient(to bottom, transparent 0%, black 6%, black 78%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.temple-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  filter: sepia(0.12) saturate(1.1) contrast(1.04);
+}
+
+/* --------------------------------------------------------------------------
+   6. AMBIENT PARTICLES CANVAS
+   -------------------------------------------------------------------------- */
+#ambient-particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   7. PRELOADER CENTERED FLOW
+   -------------------------------------------------------------------------- */
+.preloader-content {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(0.35rem, 1.2vh, 0.95rem) clamp(1rem, 2.5vw, 2.2rem);
+  max-width: 900px;
+  width: 95%;
+  max-height: 96vh;
+}
+
+/* --------------------------------------------------------------------------
+   8. SACRED SYMBOLS: CHAKRA, THIRUNAMAM, SHANKHA (BIG & Crisp Metallic)
+   -------------------------------------------------------------------------- */
+.sacred-symbols {
+  margin-bottom: clamp(0.15rem, 0.6vh, 0.4rem);
+  opacity: 0;
+  transform: translateY(-20px);
+  will-change: transform, opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.namalu-img {
+  height: clamp(84px, 12vh, 120px); /* Big, commanding size */
+  width: auto;
+  max-width: clamp(290px, 42vw, 440px);
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  /* Crisp high-contrast metallic gold finish */
+  filter: contrast(1.25) saturate(1.35) brightness(1.05) drop-shadow(0 4px 14px rgba(184, 134, 11, 0.42));
+}
+
+/* --------------------------------------------------------------------------
+   9. DEITY: BIG IN SIZE, ENHANCED GARLANDS & RADIANT GOLDEN AURA
+   -------------------------------------------------------------------------- */
+.swami-entrance-wrapper {
+  position: relative;
+  margin-bottom: clamp(0.25rem, 0.8vh, 0.65rem);
+  transform: translateY(-110vh);
+  opacity: 0;
+  will-change: transform, opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Warm Glowing Golden Aura Swirls & Halo */
+.golden-aura-swirls {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(330px, 42vw, 470px);
+  height: clamp(360px, 45vh, 500px);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(15px);
+  animation: auraPulse 3.5s ease-in-out infinite alternate;
+}
+
+.aura-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes auraPulse {
+  0% { transform: translate(-50%, -50%) scale(0.93); filter: blur(13px); opacity: 0.85; }
+  100% { transform: translate(-50%, -50%) scale(1.12); filter: blur(20px); opacity: 1; }
+}
+
+/* Deity Container — Big in Size matching reference */
+.swami-img-box {
+  position: relative;
+  width: clamp(210px, 27vw, 295px); /* Big, majestic presence */
+  height: clamp(270px, 38vh, 385px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swami-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+  /* Enhanced brightness for pink lotus malas, green tulsi garlands & gold jewels */
+  filter: saturate(1.38) contrast(1.14) brightness(1.08) drop-shadow(0 8px 26px rgba(160, 120, 40, 0.35));
+}
+
+/* --------------------------------------------------------------------------
+   10. TYPOGRAPHY: EXPRESSIVE FOREST-GREEN SERIF + WIDE BOLD CHARCOAL SANS
+   -------------------------------------------------------------------------- */
+.title-section {
+  opacity: 0;
+  transform: translateY(32px);
+  will-change: transform, opacity;
+  margin-bottom: clamp(0.6rem, 1.8vh, 1.3rem);
+}
+
+.brand-title {
+  margin-bottom: clamp(0.18rem, 0.5vh, 0.35rem);
+  line-height: 1.18;
+}
+
+/* "VENKATESHWARA": Thicker, expressive forest-green serif font with drop shadow */
+.title-primary {
+  display: block;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.85rem, 4.8vw, 3.15rem);
+  font-weight: 900; /* Thicker expressive weight */
+  letter-spacing: 0.08em;
+  color: var(--title-forest);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(21, 48, 27, 0.15);
+}
+
+/* "REFRIGERATIONS AND": Wider bold dark-charcoal sans-serif */
+.title-secondary {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.85rem, 2.1vw, 1.32rem);
+  font-weight: 900; /* Bold dark-charcoal */
+  letter-spacing: 0.14em; /* Wider spacing */
+  color: var(--title-charcoal);
+  margin-top: 0.15rem;
+  text-transform: uppercase;
+}
+
+/* "AIR CONDITIONER SERVICE CENTER": Wider bold dark-charcoal sans-serif */
+.title-tertiary {
+  display: block;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.82rem, 2vw, 1.28rem);
+  font-weight: 900;
+  letter-spacing: 0.12em; /* Wider spacing */
+  color: var(--title-charcoal);
+  text-transform: uppercase;
+}
+
+/* Tagline with Increased Letter-Spacing */
+.brand-tagline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.74rem, 1.6vw, 0.95rem);
+  font-weight: 600;
+  color: var(--text-tagline);
+  letter-spacing: 0.08em; /* Increased letter-spacing */
+  margin-top: clamp(0.25rem, 0.6vh, 0.42rem);
+  margin-bottom: 0;
+}
+
+.brand-tagline .bullet {
+  color: var(--gold-primary);
+  margin: 0 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
+   11. BRIGHTENED METALLIC GOLD CAPSULE LOADING BAR
+   -------------------------------------------------------------------------- */
+.loader-wrap {
+  width: 100%;
+  max-width: clamp(265px, 38vw, 335px);
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cooling-capsule {
+  width: 100%;
+  height: clamp(34px, 4.5vh, 42px);
+  display: flex;
+  align-items: center;
+  gap: clamp(0.45rem, 1vw, 0.7rem);
+  background: linear-gradient(135deg, rgba(78, 54, 28, 0.94), rgba(48, 32, 16, 0.98));
+  border-radius: 50px;
+  padding: 0 clamp(0.7rem, 1.5vw, 1rem);
+  border: 2px solid rgba(235, 195, 95, 0.75); /* Warm metallic gold border */
+  box-shadow: 
+    0 4px 20px rgba(184, 134, 11, 0.28), 
+    inset 0 1px 3px rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+.capsule-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* Clear Snowflake Icon on Left */
+.capsule-icon.left-icon {
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: #FFF5D2;
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.6));
+}
+
+/* Clear Spinning Fan Propeller */
+.capsule-icon.fan-icon {
+  animation: spinFan 2.5s linear infinite;
+  color: #FFE690;
+  font-size: clamp(1.15rem, 2vw, 1.35rem);
+  filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.7));
+}
+
+/* Clear Snowflake Icon on Right */
+.capsule-icon.right-icon {
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  color: #E8F7FC;
+  filter: drop-shadow(0 0 4px rgba(180, 230, 255, 0.6));
+}
+
+@keyframes spinFan {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Progress Track with Warm Metallic Gold Gradient */
+.capsule-progress-track {
+  flex: 1;
+  height: clamp(7.5px, 1vh, 9.5px);
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(245, 201, 83, 0.4);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.capsule-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #A87A24 0%, #E8BC48 50%, #FFF5A8 100%);
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 12px rgba(245, 201, 83, 0.75);
+  transition: width 0.15s ease-out;
+}
+
+/* Glowing Golden Indicator on Leading Edge */
+.capsule-progress-fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px #FFFFFF, 0 0 16px #FFD700;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   12. REVEALED WEBSITE CONTENT WITH STICKY HOME HEADER
+   -------------------------------------------------------------------------- */
+#main-content {
+  position: relative;
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 10;
+}
+
+#main-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Home Page Header with Home, Services, Contact Navigation */
+.home-header {
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  background: rgba(245, 239, 228, 0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1.5px solid rgba(197, 154, 69, 0.25);
+  box-shadow: 0 4px 18px rgba(40, 30, 15, 0.04);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.85rem 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.nav-namam {
+  height: 38px;
+  width: auto;
+  mix-blend-mode: multiply;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-brand-main {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--title-forest);
+  line-height: 1.15;
+}
+
+.nav-brand-sub {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+/* Home, Services, Contact Navigation Links */
+.home-nav .nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2.2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--title-charcoal);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--gold-primary);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--title-forest);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-nav-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  background: linear-gradient(135deg, #c59a3f, #a07828);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 3px 12px rgba(160, 120, 40, 0.25);
+  transition: all 0.3s ease;
+}
+
+.btn-nav-book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 18px rgba(160, 120, 40, 0.4);
+  background: linear-gradient(135deg, #d4a520, #b8860b);
+}
+
+/* --------------------------------------------------------------------------
+   LANGUAGE TOGGLE BAR & DYNAMIC BILINGUAL SWITCHING (EN | తెలుగు)
+   -------------------------------------------------------------------------- */
+.lang-toggle-bar {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(197, 154, 69, 0.45);
+  border-radius: 50px;
+  padding: 0.18rem 0.35rem;
+  box-shadow: 0 2px 8px rgba(40, 30, 15, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.lang-toggle-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--title-charcoal);
+  padding: 0.28rem 0.75rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  line-height: 1.2;
+}
+
+.lang-toggle-btn.active {
+  background: linear-gradient(135deg, #15301B 0%, #204929 100%);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(21, 48, 27, 0.35);
+}
+
+.lang-toggle-sep {
+  color: rgba(197, 154, 69, 0.65);
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin: 0 1px;
+}
+
+/* Dynamic Visibility for Bilingual Content */
+body.lang-en .lang-te {
+  display: none !important;
+}
+
+body.lang-te .lang-en {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   DIVINE HOME HERO SECTION (Mirroring Loading Screen Visuals)
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(2.5rem, 5vh, 4rem) clamp(1rem, 3vw, 2rem);
+  background: radial-gradient(ellipse at 50% 32%, #FFFFFF 0%, #FAF7F0 40%, #F3EADB 78%, #E7DAC2 100%);
+  overflow: hidden;
+}
+
+/* Home Temple Backdrop - Positioned Upper Left till branch */
+.home-temple-backdrop {
+  position: absolute;
+  top: clamp(10px, 2.5vh, 40px);
+  left: clamp(10px, 3vw, 40px);
+  width: calc(100% - clamp(180px, 25vw, 360px));
+  max-width: 1100px;
+  height: clamp(260px, 45vh, 460px);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.38;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: -webkit-linear-gradient(left, transparent 0%, black 5%, black 82%, transparent 100%),
+                      -webkit-linear-gradient(top, transparent 0%, black 6%, black 78%, transparent 100%);
+  -webkit-mask-composite: destination-in;
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 82%, transparent 100%),
+              linear-gradient(to bottom, transparent 0%, black 6%, black 78%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.home-temple-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  filter: sepia(0.12) saturate(1.1) contrast(1.04);
+}
+
+/* Right-side Plant Branch Accent */
+.home-branch-accent {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+  width: clamp(210px, 28vw, 440px);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.9;
+}
+
+.home-branch-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: blur(1.5px) contrast(1.04) brightness(0.98);
+}
+
+.hero-container {
+  max-width: 1080px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Home Sacred Symbols (Chakra, Thirunamam, Shankha) */
+.home-sacred-symbols {
+  margin-bottom: clamp(0.2rem, 0.8vh, 0.5rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.home-namalu-img {
+  height: clamp(76px, 11vh, 110px);
+  width: auto;
+  max-width: clamp(280px, 40vw, 420px);
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  filter: contrast(1.25) saturate(1.35) brightness(1.05) drop-shadow(0 4px 14px rgba(184, 134, 11, 0.4));
+}
+
+/* Home Lord Venkateshwara Deity with Radiant Golden Aura */
+.home-swami-wrapper {
+  position: relative;
+  margin-bottom: clamp(0.35rem, 1vh, 0.8rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-golden-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(280px, 38vw, 430px);
+  height: clamp(290px, 42vh, 440px);
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 245, 184, 0.9) 0%, rgba(255, 215, 0, 0.55) 35%, rgba(229, 168, 37, 0.28) 60%, rgba(184, 134, 11, 0) 75%);
+  filter: blur(14px);
+  border-radius: 50%;
+}
+
+.home-swami-img-box {
+  position: relative;
+  z-index: 3;
+  width: clamp(190px, 24vw, 275px);
+  height: clamp(250px, 34vh, 360px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-swami-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  mix-blend-mode: multiply;
+  filter: contrast(1.18) saturate(1.4) brightness(1.08) drop-shadow(0 8px 24px rgba(60, 40, 10, 0.35));
+}
+
+/* Home Brand Title Section (Matching Loading Screen Exactly) */
+.home-title-section {
+  text-align: center;
+  margin-bottom: clamp(1.2rem, 2.5vh, 2rem);
+  width: 100%;
+  max-width: 900px;
+}
+
+.home-brand-title {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-title-primary {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 900;
+  font-size: clamp(1.85rem, 4.4vw, 3.4rem);
+  color: var(--title-forest);
+  letter-spacing: clamp(0.08em, 1.2vw, 0.16em);
+  text-shadow: 
+    0 1px 1px rgba(255, 255, 255, 0.8),
+    0 2px 8px rgba(18, 44, 24, 0.18);
+  line-height: 1.15;
+  margin-bottom: clamp(0.15rem, 0.5vh, 0.35rem);
+}
+
+.home-title-secondary,
+.home-title-tertiary {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 900;
+  font-size: clamp(0.85rem, 1.9vw, 1.45rem);
+  color: var(--title-charcoal);
+  letter-spacing: clamp(0.12em, 1.8vw, 0.24em);
+  text-transform: uppercase;
+  line-height: 1.35;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.home-brand-tagline {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.78rem, 1.45vw, 1.05rem);
+  font-weight: 600;
+  color: var(--text-tagline);
+  letter-spacing: clamp(0.05em, 0.9vw, 0.12em);
+  margin-top: clamp(0.35rem, 0.8vh, 0.75rem);
+  margin-bottom: 0;
+}
+
+.home-brand-tagline .bullet {
+  color: var(--gold-primary);
+  font-weight: 700;
+  margin: 0 0.35rem;
+}
+
+/* Home Hero Action CTA Buttons */
+.home-hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.btn-hero-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.95rem;
+  background: linear-gradient(135deg, #F0C755 0%, #D4A02A 50%, #B8861E 100%);
+  color: #122817;
+  font-weight: 800;
+  font-size: 0.98rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 6px 22px rgba(212, 160, 42, 0.45);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1.5px solid #FFE79A;
+  letter-spacing: 0.01em;
+}
+
+.btn-hero-book:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 10px 28px rgba(212, 160, 42, 0.6);
+  background: linear-gradient(135deg, #FFD566 0%, #E2AB33 50%, #C49224 100%);
+  color: #0b1a0f;
+}
+
+.btn-hero-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.85rem;
+  background: linear-gradient(135deg, #15301B 0%, #1f4828 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 5px 20px rgba(21, 48, 27, 0.35);
+  transition: all 0.3s ease;
+  border: 1.5px solid rgba(197, 154, 63, 0.45);
+}
+
+.btn-hero-call:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(21, 48, 27, 0.5);
+  background: linear-gradient(135deg, #1a3c22 0%, #295d34 100%);
+}
+
+.btn-hero-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.85rem;
+  background: linear-gradient(135deg, #128C7E 0%, #25D366 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 5px 20px rgba(18, 140, 126, 0.35);
+  transition: all 0.3s ease;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-hero-whatsapp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+  background: linear-gradient(135deg, #0e7368 0%, #20ba59 100%);
+}
+
+.btn-hero-services {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.85rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--title-forest);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-radius: 50px;
+  text-decoration: none;
+  border: 1.5px solid rgba(21, 48, 27, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.btn-hero-services:hover {
+  transform: translateY(-3px);
+  background: #FFFFFF;
+  border-color: var(--title-forest);
+  box-shadow: 0 6px 20px rgba(21, 48, 27, 0.15);
+}
+
+/* Home Trust Badge */
+.home-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.4rem;
+  background: rgba(184, 134, 11, 0.09);
+  border: 1px solid rgba(184, 134, 11, 0.28);
+  border-radius: 50px;
+  color: #6D5010;
+  font-weight: 700;
+  font-size: 0.85rem;
+  margin-bottom: 2.8rem;
+  backdrop-filter: blur(6px);
+}
+
+/* --------------------------------------------------------------------------
+   ABOUT THE OWNER & FOUNDER SECTION (Venkatesh Reddy - Chennur)
+   -------------------------------------------------------------------------- */
+.about-owner-section {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto 3.8rem;
+  scroll-margin-top: 90px;
+}
+
+.about-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.8rem, 3.5vw, 3rem);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1.5px solid rgba(197, 154, 69, 0.35);
+  border-radius: 24px;
+  padding: clamp(1.8rem, 3.2vw, 2.8rem);
+  box-shadow: 
+    0 12px 35px rgba(40, 30, 15, 0.07),
+    0 2px 8px rgba(197, 154, 69, 0.12);
+  backdrop-filter: blur(14px);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+/* Subtle decorative golden corner flourish inside about card */
+.about-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at top left, rgba(212, 165, 32, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Left Photo Wrapper */
+.about-photo-wrapper {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: clamp(210px, 25vw, 260px);
+}
+
+.photo-frame-ornament {
+  position: relative;
+  width: clamp(180px, 22vw, 220px);
+  height: clamp(210px, 26vw, 260px);
+  border-radius: 20px;
+  padding: 6px;
+  background: linear-gradient(135deg, #FFD700 0%, #C59A45 50%, #A07828 100%);
+  box-shadow: 
+    0 8px 25px rgba(160, 120, 40, 0.28),
+    inset 0 1px 3px rgba(255, 255, 255, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photo-frame-glow {
+  position: absolute;
+  inset: -10px;
+  border-radius: 28px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.32) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.owner-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 15px;
+  background: #F5EFE4;
+  position: relative;
+  z-index: 1;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.owner-photo:hover {
+  transform: scale(1.03);
+}
+
+/* Experience Floating Badge */
+.photo-exp-badge {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: linear-gradient(135deg, #15301B, #204929);
+  color: #FFFFFF;
+  border: 1.5px solid #E8BC48;
+  border-radius: 50px;
+  padding: 0.35rem 0.95rem;
+  box-shadow: 0 4px 14px rgba(21, 48, 27, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.exp-num {
+  font-size: 0.98rem;
+  font-weight: 900;
+  color: #FFD700;
+  font-family: 'Cinzel Decorative', serif;
+}
+
+.exp-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+/* Photo Caption below Frame */
+.photo-caption {
+  margin-top: 1.35rem;
+  width: 100%;
+}
+
+.caption-name {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.12rem;
+  font-weight: 900;
+  color: var(--title-forest);
+  margin-bottom: 0.15rem;
+}
+
+.caption-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  margin-bottom: 0.25rem;
+}
+
+.caption-loc {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--text-tagline);
+  background: rgba(197, 154, 69, 0.12);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+
+/* Right Content Column */
+.about-content {
+  flex: 1;
+}
+
+.about-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.95rem;
+  background: rgba(21, 48, 27, 0.08);
+  border: 1px solid rgba(21, 48, 27, 0.2);
+  border-radius: 50px;
+  color: var(--title-forest);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+
+.about-headline {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  font-weight: 900;
+  color: var(--title-forest);
+  line-height: 1.25;
+  margin-bottom: 0.4rem;
+}
+
+.highlight-name {
+  color: #A07828;
+  position: relative;
+  display: inline-block;
+}
+
+.about-role {
+  font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+  color: var(--title-charcoal);
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 1rem;
+}
+
+.about-role strong {
+  color: var(--title-forest);
+  font-weight: 800;
+}
+
+.about-bio {
+  font-size: 0.95rem;
+  color: var(--text-tagline);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.about-bio-secondary {
+  font-size: 0.92rem;
+  color: var(--text-tagline);
+  line-height: 1.7;
+  margin-bottom: 1.4rem;
+}
+
+.about-bio strong,
+.about-bio-secondary strong {
+  color: var(--title-charcoal);
+  font-weight: 700;
+}
+
+/* Trust Pillars 2x2 Grid */
+.about-features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.about-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  background: rgba(245, 239, 228, 0.65);
+  border: 1px solid rgba(197, 154, 69, 0.22);
+  border-radius: 12px;
+  padding: 0.75rem 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.about-feature-item:hover {
+  background: #FFFFFF;
+  border-color: var(--gold-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(160, 120, 40, 0.1);
+}
+
+.about-feature-item .feature-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.about-feature-item .feature-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-feature-item .feature-text strong {
+  font-size: 0.88rem;
+  color: var(--title-forest);
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.about-feature-item .feature-text span {
+  font-size: 0.76rem;
+  color: var(--text-tagline);
+  line-height: 1.35;
+  margin-top: 2px;
+}
+
+/* Contact CTAs in About */
+.about-contact-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-about-book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.6rem;
+  background: linear-gradient(135deg, #F0C755 0%, #D4A02A 50%, #B8861E 100%);
+  color: #122817;
+  font-weight: 800;
+  font-size: 0.92rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 5px 18px rgba(212, 160, 42, 0.4);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border: 1.5px solid #FFE79A;
+}
+
+.btn-about-book:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(212, 160, 42, 0.55);
+  background: linear-gradient(135deg, #FFD566 0%, #E2AB33 50%, #C49224 100%);
+  color: #0b1a0f;
+}
+
+.btn-about-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #15301B, #204929);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(21, 48, 27, 0.3);
+  transition: all 0.3s ease;
+  border: 1.5px solid rgba(232, 188, 72, 0.4);
+}
+
+.btn-about-call:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(21, 48, 27, 0.45);
+  background: linear-gradient(135deg, #1c4224, #2a6136);
+}
+
+.btn-about-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #128C7E, #25D366);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(18, 140, 126, 0.3);
+  transition: all 0.3s ease;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+}
+
+.btn-about-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(37, 211, 102, 0.45);
+  background: linear-gradient(135deg, #0e7368, #20ba59);
+}
+
+.btn-about-services {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.4rem;
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--title-forest);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  text-decoration: none;
+  border: 1.5px solid rgba(21, 48, 27, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-about-services:hover {
+  transform: translateY(-2px);
+  background: #FFFFFF;
+  border-color: var(--title-forest);
+  box-shadow: 0 4px 14px rgba(21, 48, 27, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   VISITING CARD INSPIRED SERVICES & SPARES SECTION
+   -------------------------------------------------------------------------- */
+.services-wrapper {
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  scroll-margin-top: 90px;
+  text-align: center;
+}
+
+/* Badges from top of Visiting Card */
+.services-top-badges {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.badge-card-service,
+.badge-card-doorstep {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1.25rem;
+  background: linear-gradient(135deg, #15301B, #204929);
+  color: #FFD700;
+  font-weight: 800;
+  font-size: 0.86rem;
+  border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(21, 48, 27, 0.25);
+  border: 1.5px solid #E8BC48;
+}
+
+.services-section-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+  font-weight: 900;
+  color: var(--title-forest);
+  margin-bottom: 0.35rem;
+}
+
+.title-sub-en {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+  color: #A07828;
+  font-weight: 700;
+  display: block;
+  margin-top: 0.2rem;
+}
+
+.services-section-subtitle {
+  font-size: clamp(0.88rem, 1.7vw, 1.05rem);
+  color: var(--text-tagline);
+  font-weight: 700;
+  max-width: 820px;
+  margin: 0 auto 2.2rem;
+  line-height: 1.6;
+}
+
+/* 5 Core Appliance Services Grid */
+.services-grid-visiting {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.6rem;
+  text-align: left;
+  margin-bottom: 3.5rem;
+}
+
+.service-card-item {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(197, 154, 69, 0.32);
+  border-radius: 20px;
+  padding: 1.8rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px);
+}
+
+.service-card-item:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-primary);
+  box-shadow: 0 14px 35px rgba(160, 120, 40, 0.16);
+}
+
+/* Pill Tags styled in regal Forest Green and Temple Gold */
+.service-card-top-tag {
+  align-self: flex-start;
+  padding: 0.35rem 1rem;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #15301B, #224D2C);
+  color: #FFD700;
+  border: 1.5px solid rgba(232, 188, 72, 0.6);
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 3px 10px rgba(21, 48, 27, 0.2);
+}
+
+.tag-refrigerator,
+.tag-washing,
+.tag-ac,
+.tag-geyser,
+.tag-purifier {
+  background: linear-gradient(135deg, #15301B, #224D2C);
+}
+
+/* Real Product Image Box for Services */
+.service-image-box {
+  width: 100%;
+  height: 160px;
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1.5px solid rgba(197, 154, 69, 0.35);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.15rem;
+  padding: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.9), 0 3px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.service-card-item:hover .service-image-box {
+  transform: scale(1.03);
+  border-color: var(--gold-primary);
+  box-shadow: 0 8px 22px rgba(197, 154, 69, 0.22);
+}
+
+.service-prod-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.service-card-item:hover .service-prod-img {
+  transform: scale(1.04);
+}
+
+.service-item-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--title-forest);
+  margin-bottom: 0.65rem;
+  line-height: 1.35;
+}
+
+.service-item-desc {
+  font-size: 0.88rem;
+  color: var(--text-tagline);
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
+  flex-grow: 1;
+}
+
+.service-feature-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.service-feature-bullets li {
+  font-size: 0.81rem;
+  font-weight: 600;
+  color: var(--title-charcoal);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  line-height: 1.4;
+}
+
+.btn-service-book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1.4rem;
+  background: linear-gradient(135deg, #15301B, #204929);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border-radius: 50px;
+  text-decoration: none;
+  border: 1px solid rgba(232, 188, 72, 0.4);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(21, 48, 27, 0.2);
+}
+
+.btn-service-book:hover {
+  background: linear-gradient(135deg, #1c4224, #2a6136);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(21, 48, 27, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   SPARE PARTS SHOWCASE (స్పేర్ పార్ట్స్ అందుబాటులో)
+   Unified Styling: Matches About & Services sections with matching ivory background
+   -------------------------------------------------------------------------- */
+.spares-showcase-container {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1.5px solid rgba(197, 154, 69, 0.32);
+  border-radius: 24px;
+  padding: clamp(2rem, 3.5vw, 3rem) clamp(1.4rem, 2.8vw, 2.5rem);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(10px);
+  margin-bottom: 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.spares-header {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
+
+.spares-badge-ornament {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 1.3rem;
+  background: linear-gradient(135deg, #15301B, #204929);
+  color: #FFD700;
+  font-weight: 800;
+  font-size: 0.86rem;
+  letter-spacing: 0.04em;
+  border-radius: 50px;
+  margin-bottom: 0.85rem;
+  border: 1.5px solid #E8BC48;
+  box-shadow: 0 4px 14px rgba(21, 48, 27, 0.18);
+}
+
+.spares-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.5rem, 3.4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--title-forest);
+  margin-bottom: 0.4rem;
+}
+
+.spares-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-tagline);
+  font-weight: 600;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.spares-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.4rem;
+  text-align: left;
+}
+
+.spare-card {
+  background: #FFFFFF;
+  border: 1.5px solid rgba(197, 154, 69, 0.28);
+  border-radius: 18px;
+  padding: 1.4rem;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+}
+
+.spare-card:hover {
+  background: #FFFFFF;
+  border-color: var(--gold-primary);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(160, 120, 40, 0.16);
+}
+
+/* Real Product Image Box for Spare Parts */
+.spare-image-box {
+  width: 100%;
+  height: 135px;
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F8FAFC 100%);
+  border: 1.5px solid rgba(197, 154, 69, 0.28);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  padding: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.9), 0 2px 8px rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spare-card:hover .spare-image-box {
+  transform: scale(1.03);
+  border-color: var(--gold-primary);
+  box-shadow: 0 6px 18px rgba(197, 154, 69, 0.2);
+}
+
+.spare-prod-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.spare-card:hover .spare-prod-img {
+  transform: scale(1.04);
+}
+
+.spare-tag {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.spare-name {
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--title-forest);
+  margin-bottom: 0.4rem;
+  line-height: 1.35;
+}
+
+.spare-desc {
+  font-size: 0.86rem;
+  color: var(--text-tagline);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   LIVE SERVICE MEDIA PLAYER SECTION (#videos)
+   Unified Styling: Matches About & Services sections with matching ivory background
+   -------------------------------------------------------------------------- */
+.media-player-section {
+  padding: 3.5rem 1.5rem 4rem;
+  background: transparent;
+  scroll-margin-top: 80px;
+}
+
+.media-player-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.media-header {
+  margin-bottom: 2.2rem;
+}
+
+.media-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 1.2rem;
+  background: rgba(21, 48, 27, 0.08);
+  border: 1.5px solid rgba(21, 48, 27, 0.25);
+  border-radius: 50px;
+  color: var(--title-forest);
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.media-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.7rem, 3.8vw, 2.5rem);
+  font-weight: 900;
+  color: var(--title-forest);
+  margin-bottom: 0.4rem;
+}
+
+.media-subtitle {
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  color: var(--text-tagline);
+  font-weight: 600;
+  max-width: 760px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.media-gt {
+  color: #15301B;
+  background: linear-gradient(135deg, #E8BC48, #FFD700);
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  font-weight: 900;
+  box-shadow: 0 2px 6px rgba(232, 188, 72, 0.35);
+  display: inline-block;
+}
+
+/* Matching Light Ivory Showcase Container */
+.media-card-showcase {
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.5px solid rgba(197, 154, 69, 0.35);
+  border-radius: 24px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  box-shadow: 0 10px 35px rgba(21, 48, 27, 0.06);
+  backdrop-filter: blur(10px);
+}
+
+.media-card-centered {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* Center Video Stage with Arrows */
+.media-player-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 2vw, 1.8rem);
+  margin-bottom: 1.2rem;
+}
+
+.media-video-viewport {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 9 / 16;
+  max-height: 520px;
+  background: #000000;
+  border-radius: 20px;
+  border: 2.5px solid #E8BC48;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22), 0 0 22px rgba(232, 188, 72, 0.2);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-video-viewport video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
+
+/* Navigation Arrow Buttons '<' and '>' */
+.media-nav-arrow {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #15301B, #204929);
+  border: 2px solid #E8BC48;
+  color: #FFD700;
+  font-size: 1.75rem;
+  font-family: monospace, sans-serif;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(21, 48, 27, 0.25);
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+  padding-bottom: 2px;
+}
+
+.media-nav-arrow:hover {
+  transform: scale(1.12);
+  background: linear-gradient(135deg, #1c4224, #2a6136);
+  border-color: #FFD700;
+  box-shadow: 0 6px 20px rgba(232, 188, 72, 0.45);
+  color: #FFFFFF;
+}
+
+.media-nav-arrow:active {
+  transform: scale(0.95);
+}
+
+/* Bottom Counter Indicator */
+.media-counter-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(21, 48, 27, 0.08);
+  border: 1px solid rgba(21, 48, 27, 0.2);
+  border-radius: 30px;
+  padding: 0.35rem 1.1rem;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: var(--title-forest);
+}
+
+.counter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #25D366;
+  box-shadow: 0 0 6px #25D366;
+}
+
+@media (max-width: 500px) {
+  .media-player-stage {
+    gap: 0.5rem;
+  }
+  .media-nav-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+  }
+  .media-video-viewport {
+    max-width: 270px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   CONTACT SECTION (#contact)
+   -------------------------------------------------------------------------- */
+.contact-section {
+  padding: 4.5rem 1.5rem;
+  background: linear-gradient(180deg, #EDE3D1 0%, #FAF6EE 50%, #F5EFEB 100%);
+  scroll-margin-top: 80px;
+}
+
+.contact-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-badge {
+  display: inline-block;
+  padding: 0.35rem 1.2rem;
+  background: rgba(197, 154, 63, 0.16);
+  border: 1px solid rgba(197, 154, 63, 0.35);
+  border-radius: 50px;
+  color: var(--gold-deep);
+  font-size: 0.84rem;
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+}
+
+.contact-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: clamp(1.6rem, 3.8vw, 2.5rem);
+  font-weight: 900;
+  color: var(--title-forest);
+  margin-bottom: 0.5rem;
+}
+
+.contact-subtext {
+  font-size: 1rem;
+  color: var(--text-tagline);
+  margin-bottom: 2.5rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* --------------------------------------------------------------------------
+   CONTACT SECTION: TWO-COLUMN FORM & SIDE ACTION BUTTONS (#contact)
+   -------------------------------------------------------------------------- */
+.contact-form-layout {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 1.8rem;
+  max-width: 980px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+/* Form Card (Beside Side Action Buttons) */
+.booking-form-card {
+  flex: 1 1 540px;
+  max-width: 600px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.6px solid rgba(197, 154, 69, 0.35);
+  border-radius: 24px;
+  padding: clamp(1.8rem, 3.5vw, 2.6rem) clamp(1.4rem, 3vw, 2.4rem);
+  box-shadow: 0 12px 35px rgba(21, 48, 27, 0.08), 0 2px 10px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+/* Side Action Buttons Container (Beside Form) */
+.contact-side-panel {
+  flex: 0 1 330px;
+  min-width: 280px;
+  display: flex;
+}
+
+.side-panel-card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.6px solid rgba(197, 154, 69, 0.35);
+  border-radius: 24px;
+  padding: clamp(1.8rem, 3.2vw, 2.4rem) 1.5rem;
+  box-shadow: 0 12px 35px rgba(21, 48, 27, 0.08), 0 2px 10px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.side-panel-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #E8BC48 0%, #FFD700 50%, #C59A45 100%);
+}
+
+.side-panel-header {
+  margin-bottom: 1.5rem;
+}
+
+.side-panel-badge {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #15301B;
+  background: rgba(232, 188, 72, 0.22);
+  border: 1px solid rgba(232, 188, 72, 0.6);
+  border-radius: 20px;
+  padding: 0.25rem 0.75rem;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.side-panel-title {
+  font-family: 'Cinzel', serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--title-forest);
+  margin-bottom: 0.35rem;
+}
+
+.side-panel-sub {
+  font-size: 0.85rem;
+  color: var(--text-tagline);
+  line-height: 1.4;
+}
+
+.side-buttons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+  margin-bottom: 1.6rem;
+}
+
+/* Small Action Button with Logo */
+.side-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 16px;
+  text-decoration: none;
+  background: #FCFAF6;
+  border: 1.5px solid rgba(197, 154, 69, 0.3);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.side-action-btn:hover {
+  transform: translateY(-3px);
+  border-color: #E8BC48;
+  box-shadow: 0 8px 22px rgba(184, 134, 11, 0.18);
+  background: #FFFFFF;
+}
+
+.side-btn-logo-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease;
+}
+
+.side-action-btn:hover .side-btn-logo-circle {
+  transform: scale(1.08);
+}
+
+/* Individual Button Accent Colors */
+.btn-side-call .side-btn-logo-circle {
+  background: linear-gradient(135deg, #15301B, #204929);
+  color: #FFD700;
+  border: 1.5px solid #E8BC48;
+}
+
+.btn-side-wa .side-btn-logo-circle {
+  background: linear-gradient(135deg, #128C7E, #25D366);
+  color: #FFFFFF;
+  border: 1.5px solid #81C784;
+}
+
+.btn-side-map .side-btn-logo-circle {
+  background: linear-gradient(135deg, #A83232, #D9534F);
+  color: #FFFFFF;
+  border: 1.5px solid #F5A97F;
+}
+
+.side-btn-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-btn-micro-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #8C8272;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+}
+
+.side-btn-main-text {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #15301B;
+  margin-top: 0.15rem;
+}
+
+.side-panel-footer {
+  padding-top: 1.1rem;
+  border-top: 1px dashed rgba(197, 154, 69, 0.35);
+}
+
+.timing-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #15301B;
+  margin-bottom: 0.45rem;
+}
+
+.pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #27AE60;
+  box-shadow: 0 0 6px rgba(39, 174, 96, 0.6);
+}
+
+.doorstep-promise {
+  font-size: 0.78rem;
+  color: #7D6B50;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.booking-form-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #E8BC48 0%, #FFD700 50%, #C59A45 100%);
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.form-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #15301B;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.required-star {
+  color: #C0392B;
+  font-weight: 900;
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  padding: 0.85rem 1.1rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: #1E232A;
+  background: #FCFAF6;
+  border: 1.5px solid rgba(197, 154, 69, 0.4);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.form-input::placeholder {
+  color: #9E9585;
+  font-size: 0.88rem;
+}
+
+.form-input:focus,
+.form-select:focus {
+  background: #FFFFFF;
+  border-color: #E8BC48;
+  box-shadow: 0 0 0 3.5px rgba(232, 188, 72, 0.25);
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper::after {
+  content: '▼';
+  font-size: 0.72rem;
+  color: #15301B;
+  position: absolute;
+  right: 1.1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  padding-right: 2.5rem;
+}
+
+.form-select option {
+  background: #FFFFFF;
+  color: #1E232A;
+  font-size: 0.95rem;
+  padding: 0.5rem;
+}
+
+/* Submit Book Service Button */
+.btn-book-service {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 1rem 1.6rem;
+  margin-top: 0.4rem;
+  background: linear-gradient(135deg, #15301B 0%, #1e4b27 50%, #15301B 100%);
+  color: #FFFFFF;
+  border: 1.5px solid #E8BC48;
+  border-radius: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(21, 48, 27, 0.25);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.btn-book-service:hover {
+  background: linear-gradient(135deg, #1c4224 0%, #296937 50%, #1c4224 100%);
+  border-color: #FFD700;
+  transform: translateY(-2.5px);
+  box-shadow: 0 12px 28px rgba(21, 48, 27, 0.35);
+}
+
+.btn-book-service:active {
+  transform: translateY(0);
+}
+
+.btn-book-service .btn-icon {
+  font-size: 1.2rem;
+  filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.6));
+}
+
+/* Status message */
+.booking-status-msg {
+  display: none;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.booking-status-msg.success {
+  display: block;
+  background: #E8F5E9;
+  color: #1B5E20;
+  border: 1.5px solid #81C784;
+}
+
+.booking-status-msg.error {
+  display: block;
+  background: #FFEBEE;
+  color: #B71C1C;
+  border: 1.5px solid #E57373;
+}
+
+/* Card footer call shortcut */
+.booking-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 1.1rem;
+  margin-top: 0.2rem;
+  border-top: 1px dashed rgba(197, 154, 69, 0.35);
+  font-size: 0.86rem;
+  color: var(--text-tagline);
+}
+
+.booking-quick-call {
+  color: #15301B;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 0.25rem 0.65rem;
+  background: rgba(232, 188, 72, 0.2);
+  border: 1px solid rgba(232, 188, 72, 0.5);
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.booking-quick-call:hover {
+  background: #E8BC48;
+  color: #15301B;
+}
+
+/* Home Footer */
+.home-footer {
+  text-align: center;
+  padding: 1.8rem 1.5rem;
+  background: #E8DCC8;
+  border-top: 1px solid rgba(197, 154, 63, 0.3);
+  font-size: 0.82rem;
+  color: var(--text-tagline);
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   13. REPLAY FLOATING BUTTON
+   -------------------------------------------------------------------------- */
+.replay-wrapper {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  z-index: 1000;
+}
+
+.btn-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(245, 239, 235, 0.95);
+  color: var(--gold-deep);
+  border: 1px solid rgba(197, 154, 63, 0.4);
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.btn-replay:hover {
+  background: var(--gold-primary);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(160, 120, 40, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   14. MOBILE & COMPACT SCREEN AUTO-ADJUSTMENT
+   -------------------------------------------------------------------------- */
+@media (max-height: 740px) {
+  .preloader-content {
+    padding: 0.25rem 0.8rem;
+  }
+  .temple-backdrop {
+    width: calc(100% - clamp(160px, 25vw, 260px));
+    height: clamp(210px, 35vh, 300px);
+    left: 15px;
+    top: 10px;
+  }
+  .namalu-img {
+    height: 70px;
+  }
+  .swami-img-box {
+    width: 175px;
+    height: 235px;
+  }
+  .golden-aura-swirls {
+    width: 270px;
+    height: 300px;
+  }
+  .title-section {
+    margin-bottom: 0.45rem;
+  }
+  .title-primary {
+    font-size: 1.65rem;
+  }
+  .title-secondary, .title-tertiary {
+    font-size: 0.82rem;
+  }
+  .brand-tagline {
+    font-size: 0.7rem;
+    margin-top: 0.15rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .vintage-border-frame {
+    inset: 10px;
+  }
+  .temple-backdrop {
+    width: calc(100% - 130px);
+    height: clamp(180px, 30vh, 250px);
+    left: 10px;
+    top: 10px;
+  }
+  .right-side-branch {
+    width: 190px;
+  }
+  .corner-filigree {
+    width: 54px;
+    height: 54px;
+  }
+  .diamond-star-bottom-right {
+    right: 18px;
+    bottom: 45px;
+    width: 26px;
+    height: 26px;
+  }
+  .namalu-img {
+    height: clamp(68px, 9.5vh, 92px);
+  }
+  .swami-img-box {
+    width: clamp(175px, 48vw, 245px);
+    height: clamp(225px, 31vh, 305px);
+  }
+  .golden-aura-swirls {
+    width: clamp(260px, 64vw, 340px);
+    height: clamp(280px, 35vh, 360px);
+  }
+  .title-primary {
+    letter-spacing: 0.06em;
+    font-size: clamp(1.45rem, 6.2vw, 2.1rem);
+  }
+  .header-container {
+    padding: 0.75rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    justify-content: center;
+  }
+  .home-nav .nav-list {
+    gap: 1.4rem;
+  }
+  .nav-link {
+    font-size: 0.88rem;
+  }
+  .nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-nav-book {
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+  }
+  .home-branch-accent {
+    width: 170px;
+  }
+  .home-temple-backdrop {
+    width: calc(100% - 110px);
+    height: clamp(170px, 28vh, 230px);
+    left: 8px;
+    top: 8px;
+  }
+  .home-namalu-img {
+    height: clamp(55px, 8vh, 75px);
+  }
+  .home-swami-img-box {
+    width: clamp(160px, 45vw, 210px);
+    height: clamp(210px, 28vh, 270px);
+  }
+  .home-golden-aura {
+    width: clamp(220px, 55vw, 290px);
+    height: clamp(230px, 30vh, 300px);
+  }
+  .home-title-primary {
+    font-size: clamp(1.4rem, 6.2vw, 2rem);
+  }
+  .home-title-secondary, .home-title-tertiary {
+    font-size: clamp(0.72rem, 3.2vw, 0.95rem);
+  }
+  .home-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-hero-book, .btn-hero-call, .btn-hero-whatsapp, .btn-hero-services {
+    width: 100%;
+    justify-content: center;
+  }
+  .about-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem 1.1rem;
+    gap: 1.5rem;
+  }
+  .about-photo-wrapper {
+    width: 100%;
+  }
+  .about-features-grid {
+    grid-template-columns: 1fr;
+    text-align: left;
+    gap: 0.75rem;
+  }
+  .about-contact-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .btn-about-book, .btn-about-call, .btn-about-whatsapp, .btn-about-services {
+    width: 100%;
+    justify-content: center;
+  }
+  .services-grid-visiting {
+    grid-template-columns: 1fr;
+  }
+  .spares-grid {
+    grid-template-columns: 1fr;
+  }
+  .contact-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   FINAL POLISH: MAKEUP, FLUID ANIMATIONS & TRANSITIONS
+   ========================================================================== */
+
+/* 1. Golden Shimmer Sweep Animation for Primary CTAs */
+@keyframes shimmerSweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  35%, 100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.btn-hero-book,
+.btn-about-book,
+.btn-book-service,
+.btn-nav-book,
+.btn-service-book {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hero-book::after,
+.btn-about-book::after,
+.btn-book-service::after,
+.btn-nav-book::after,
+.btn-service-book::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmerSweep 3.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+/* 2. Tactile Button Press on All Buttons */
+.btn-hero-book:active,
+.btn-hero-call:active,
+.btn-hero-whatsapp:active,
+.btn-hero-services:active,
+.btn-about-book:active,
+.btn-about-call:active,
+.btn-about-whatsapp:active,
+.btn-about-services:active,
+.btn-service-book:active,
+.btn-book-service:active,
+.side-action-btn:active,
+.lang-btn:active {
+  transform: scale(0.96) !important;
+  transition: transform 0.1s ease !important;
+}
+
+/* 3. Hero Deity Golden Aura Breathing Glow */
+@keyframes auraBreathe {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.85;
+    filter: blur(16px);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.14);
+    opacity: 1;
+    filter: blur(24px);
+    box-shadow: 0 0 75px rgba(232, 188, 72, 0.65), 0 0 130px rgba(212, 160, 42, 0.35);
+  }
+}
+
+.home-golden-aura {
+  animation: auraBreathe 4.8s ease-in-out infinite;
+}
+
+/* 4. Sacred Symbol Floating Accent */
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.home-sacred-symbols {
+  animation: softFloat 4s ease-in-out infinite;
+}
+
+/* 5. Master Technician Photo Frame Glow & Elevation */
+@keyframes photoGlowPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(232, 188, 72, 0.35), 0 10px 30px rgba(21, 48, 27, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(232, 188, 72, 0.6), 0 15px 40px rgba(21, 48, 27, 0.3);
+  }
+}
+
+.photo-frame-ornament {
+  animation: photoGlowPulse 4s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.photo-frame-ornament:hover {
+  transform: scale(1.025);
+}
+
+/* 6. Subtle Breathing Glow on Trust Badges & Pills */
+@keyframes badgePulse {
+  0%, 100% {
+    box-shadow: 0 2px 10px rgba(197, 154, 69, 0.15);
+  }
+  50% {
+    box-shadow: 0 4px 18px rgba(232, 188, 72, 0.35);
+    border-color: rgba(232, 188, 72, 0.85);
+  }
+}
+
+.contact-badge,
+.about-badge,
+.spares-badge-ornament,
+.side-panel-badge,
+.home-trust-badge {
+  animation: badgePulse 3.8s ease-in-out infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-badge:hover,
+.about-badge:hover,
+.side-panel-badge:hover {
+  transform: scale(1.03);
+}
+
+/* 7. Form Field Focus Glow ("Makeup") */
+.form-input,
+.form-select {
+  transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.form-input:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #D4A02A !important;
+  background: #FFFFFF !important;
+  box-shadow: 0 0 0 4px rgba(212, 160, 42, 0.25), 0 8px 22px rgba(21, 48, 27, 0.08) !important;
+  transform: translateY(-2px);
+}
+
+/* 8. Quick Action Side Buttons Slide & Icon Spin */
+.side-action-btn {
+  transition: all 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.side-action-btn:hover {
+  transform: translateX(6px) !important;
+}
+
+.side-action-btn:hover .side-btn-logo-circle {
+  transform: scale(1.14) rotate(6deg);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.side-btn-logo-circle {
+  transition: transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.32s ease;
+}
+
+/* 9. Sticky Header Smooth Dynamic Elevation on Scroll */
+.home-header {
+  transition: all 0.35s ease;
+}
+
+.home-header.scrolled {
+  background: rgba(245, 239, 228, 0.98);
+  box-shadow: 0 8px 30px rgba(21, 48, 27, 0.1);
+  border-bottom-color: rgba(197, 154, 69, 0.45);
+}
+
+/* 10. Scroll-Triggered Reveal Animations */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delay helpers for grid items */
+.reveal-stagger:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger:nth-child(6) { transition-delay: 0.40s; }
+
+/* 11. Respect Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
